@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title id="titulo">Ediciones especiales</title>
+        <style>
+            body {
+                background-color:burlywood;
+                background-size: 200px;
+                background-repeat: no-repeat;
+                color: rgb(255, 255, 255) ;
+            }
+            header{
+                border-style: solid;
+                border-color: rgb(255, 0, 0);
+                font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                margin: 10px 20px;
+                background-color: cadetblue;
+            }
+            section {
+                display: flex;
+                justify-content: center; /* Centra los artículos horizontalmente */
+                flex-wrap: wrap; /* Permite que los artículos se muevan a la siguiente línea si es necesario */
+            }
+            article{
+                margin: 15px;
+                text-align: center;
+            }
+            #a {
+                color: rgb(255, 255, 255);
+                font-family: Arial, Helvetica, sans-serif;
+            }
+            * {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Ediciones especiales</h1>
+        </header>
+        <br>
+        <section> 
+            Con su suscripción, usted podrá entrar a este panel y tener todas las revistas.
+        </section>
+        <section>
+            <article>
+                <img src="img/willia.png" width="300px">        
+                <h4><a id="a" target="_blank" href="williams.html">Williams</a></h4>
+            </article>
+            <article>
+                <img src="img/" width="300px">
+                <h4><a id="a" target="_self" href=".html">Minardi</a></h4>
+            </article>
+            <article>
+                <img src="img/" width="300px">
+                <h4><a id="a" target="blank" href=".html">McLaren</a></h4>
+            </article>
+            <article>
+                <img src="img/" width="300px">
+                <h4><a id="a" target="blank" href=".html">Brabham</a></h4>
+            </article>
+            <article>
+                <img src="img/" width="300px">
+                <h4><a id="a" target="blank" href=".html">Tyrrell</a></h4>
+            </article>
+            <article>
+                <img src="img/" width="300px">
+                <h4><a id="a" target="blank" href=".html">Jordan</a></h4>
+            </article>
+        </section>
+    </body>
+</html>

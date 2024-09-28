@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flipbook Revista Junio 2024</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        #flipbook-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000;
+        }
+
+        #flipbook {
+            width: 100vw;
+            height: calc(100vh - 50px);
+            position: relative;
+            background-image: url(img/fg.png);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .pages-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+            width: 1700vw; /* Ancho ajustado para 16 páginas */
+        }
+
+        .page {
+            width: 100vw;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        .page img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .controls {
+            height: 50px; /* Reducir la altura de la barra de controles */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            position: absolute;
+            bottom: 0;
+            width: 100vw;
+            z-index: 10;
+        }
+
+        button {
+            padding: 5px 10px; /* Reducir tamaño de los botones */
+            font-size: 14px;
+            margin: 0 10px;
+            cursor: pointer;
+            color: white;
+            background-color: #ff0000;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button:disabled {
+            background-color: #666;
+            cursor: not-allowed;
+        }
+
+        #fullscreen-btn {
+            position: absolute;
+            top: 10px; /* Colocar en la parte superior derecha */
+            right: 10px;
+            z-index: 10;
+            background-color: #ff0000;
+            border: none;
+            cursor: pointer;
+        }
+
+        #fullscreen-btn img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="flipbook-container">
+    <div id="flipbook">
+        <div class="pages-container">
+            <div class="page"><img src="img/Revista Mayo 2024/portada.png" alt="Página 1"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/1.png" alt="Página 2"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/2.png" alt="Página 3"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/3.png" alt="Página 4"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/4.png" alt="Página 5"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/5.png" alt="Página 6"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/6.png" alt="Página 7"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/7.png" alt="Página 8"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/8.png" alt="Página 9"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/9.png" alt="Página 10"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/10.png" alt="Página 11"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/11.png" alt="Página 12"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/12.png" alt="Página 13"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/13.png" alt="Página 14"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/14.png" alt="Página 15"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/15.png" alt="Página 16"></div>
+            <div class="page"><img src="img/Revista Mayo 2024/32.png" alt="Página 17"></div>
+        </div>
+    </div>
+
+    <!-- Botón para pantalla completa en la esquina superior derecha -->
+    <button id="fullscreen-btn"><img src="img/pc3.jpg" alt="Pantalla completa"></button>
+
+    <div class="controls">
+        <button id="prev" disabled>Anterior</button>
+        <button id="next">Siguiente</button>
+    </div>
+</div>
+
+<script>
+    let currentPage = 0;
+    const pagesContainer = document.querySelector(".pages-container");
+    const totalPages = document.querySelectorAll(".page").length;
+    const prevButton = document.getElementById("prev");
+    const nextButton = document.getElementById("next");
+
+    function updateButtons() {
+        prevButton.disabled = currentPage === 0;
+        nextButton.disabled = currentPage === totalPages - 1;
+    }
+
+    function updatePage() {
+        const pageWidth = window.innerWidth;
+        const offsetX = -currentPage * pageWidth;
+        pagesContainer.style.transform = `translateX(${offsetX}px)`;
+        updateButtons();
+    }
+
+    function flipNextPage() {
+        if (currentPage < totalPages - 1) {
+            currentPage++;
+            updatePage();
+        }
+    }
+
+    function flipPrevPage() {
+        if (currentPage > 0) {
+            currentPage--;
+            updatePage();
+        }
+    }
+
+    nextButton.addEventListener("click", flipNextPage);
+    prevButton.addEventListener("click", flipPrevPage);
+
+    window.addEventListener("resize", updatePage);
+
+    updateButtons();
+
+    // Pantalla completa
+    const fullscreenBtn = document.getElementById('fullscreen-btn');
+    const flipbookContainer = document.getElementById('flipbook-container');
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            if (flipbookContainer.requestFullscreen) {
+                flipbookContainer.requestFullscreen();
+            } else if (flipbookContainer.mozRequestFullScreen) { 
+                flipbookContainer.mozRequestFullScreen();
+            } else if (flipbookContainer.webkitRequestFullscreen) {
+                flipbookContainer.webkitRequestFullscreen();
+            } else if (flipbookContainer.msRequestFullscreen) { 
+                flipbookContainer.msRequestFullscreen();
+            }
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    }
+
+    fullscreenBtn.addEventListener('click', toggleFullscreen);
+</script>
+
+</body>
+</html>
