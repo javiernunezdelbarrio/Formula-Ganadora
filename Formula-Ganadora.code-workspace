@@ -1,9 +1,11 @@
 {
 	"folders": [
 		{
+			"name": "Formula-Ganadora",
 			"path": "."
 		},
 		{
+			"name": "img",
 			"path": "../../../Desktop/Revista/HTML/HTML/img"
 		}
 	],
